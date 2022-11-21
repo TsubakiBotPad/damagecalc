@@ -20,26 +20,27 @@ function fixedDecimals(value: number, decimals: number = 2) {
 }
 
 interface DamageComponents {
-  Atk: number;
-  LSAtk: number;
-  Combos: number;
-  Awakenings: number;
-  TeamEffects: number;
-  SuperGravity: number;
+  Atk: number | string;
+  LSAtk: number | string;
+  Combos: number | string;
+  Awakenings: number | string;
+  TeamEffects: number | string;
+  SuperGravity: number | string;
 }
 
 const CapDisplay = ({ components, cap }: { components: DamageComponents; cap: number }) => {
   const leftoverComponents = [];
   var capCalc = cap;
   for (const [k, v] of Object.entries(components)) {
-    if (v === 0) {
+    const val = parseFloat(v);
+    if (val === 0 || v === "") {
       leftoverComponents.push(`"${k}"`);
       continue;
     }
     capCalc /= v;
   }
   const capCalcDisplay = fixedDecimals(capCalc, 0);
-  const leftoverDisplay = `${leftoverComponents.join(" xx ")} = ${capCalcDisplay}`;
+  const leftoverDisplay = `${leftoverComponents.join(" xx ")} = ${capCalcDisplay} xx`;
 
   return (
     <MathJax renderMode={"pre"} typesettingOptions={{ fn: "asciimath2chtml" }} text={leftoverDisplay} inline dynamic />
@@ -51,8 +52,8 @@ export const DamageEstimatorPage = () => {
     Atk: { value: 4000 },
     LSAtk: { value: 676 },
     "LS+c": { value: 6 },
-    Awakenings: { value: 0 },
-    TeamEffects: { value: 0 },
+    Awakenings: { value: "" },
+    TeamEffects: { value: "" },
     SuperGravity: { value: 1 }
   } as VarType);
 
@@ -67,7 +68,7 @@ export const DamageEstimatorPage = () => {
   const components: DamageComponents = {
     Atk: vars["Atk"].value,
     LSAtk: vars["LSAtk"].value,
-    Combos: 1 + 0.25 * (7 + vars["LS+c"].value - 1),
+    Combos: 1 + 0.25 * (7 + parseFloat(vars["LS+c"].value as string) - 1),
     Awakenings: vars["Awakenings"].value,
     TeamEffects: vars["TeamEffects"].value,
     SuperGravity: vars["SuperGravity"].value
@@ -112,32 +113,32 @@ export const DamageEstimatorPage = () => {
         </span>
         <HR2 />
         <FlexColC gap="0.5rem">
-          <H3>Single Cap</H3>
+          <H3>Single Cap: Main Attr</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31)} />
         </FlexColC>
 
         <FlexColC gap="0.5rem">
-          <H3>Single Cap 1/3 Subattr</H3>
+          <H3>Single Cap: Subattr (1/3)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
         </FlexColC>
 
         <FlexColC gap="0.5rem">
-          <H3>Single Cap 1/10 Subattr</H3>
+          <H3>Single Cap: Subattr (1/10)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
         </FlexColC>
 
         <FlexColC gap="0.5rem">
-          <H3>Double Cap</H3>
+          <H3>Double Cap: Main Attr</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32)} />
         </FlexColC>
 
         <FlexColC gap="0.5rem">
-          <H3>Double Cap 1/3 Subattr</H3>
+          <H3>Double Cap: Subattr (1/3)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
         </FlexColC>
 
         <FlexColC gap="0.5rem">
-          <H3>Double Cap 1/10 Subattr</H3>
+          <H3>Double Cap: Subattr (1/10)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
         </FlexColC>
 

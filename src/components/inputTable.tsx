@@ -5,10 +5,6 @@ const TD = styled.td`
 `;
 
 export interface VarType {
-  [key: string]: { value: number; step?: string };
-}
-
-export interface VarType2 {
   [key: string]: { value: number | string; step?: string };
 }
 
@@ -28,19 +24,19 @@ export const InputTable = ({
               <TD>{v}</TD>
               <TD>
                 <input
-                  type="number"
-                  step={inputs[v].step ?? "1"}
                   onChange={(e) => {
-                    var val = 0;
+                    var valueString = "";
                     if (e.currentTarget.value) {
-                      val = parseFloat(e.currentTarget.value);
+                      var val = parseFloat(e.currentTarget.value);
+                      valueString = val.toString();
                     }
 
                     var newCosts = { ...inputs };
-                    newCosts[v] = { ...newCosts[v], value: val };
+                    newCosts[v] = { ...newCosts[v], value: valueString };
                     setInputs(newCosts);
                   }}
-                  value={inputs[v].value ?? 0}
+                  value={inputs[v].value ?? ""}
+                  placeholder="Unknown"
                 />
               </TD>
             </tr>
