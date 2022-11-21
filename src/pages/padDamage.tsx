@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { MathJax } from "better-react-mathjax";
 import { useState } from "react";
-import { InputTable, VarType, VarType2 } from "../components/inputTable";
+import { InputTable, VarType } from "../components/inputTable";
 import { TitleBar } from "../components/titleBar";
 import { FlexCol, FlexColC, H2, H3, HR2, Page } from "../stylePrimitives";
 
@@ -54,10 +54,10 @@ export const PADDamagePage = () => {
     SuperGravity: { value: 1 }
   } as VarType);
 
-  const [vars2, setVars2] = useState({
-    LeadStyle: { value: "combo" },
-    BoardSize: { value: "6x5" }
-  } as VarType2);
+  // const [vars2, setVars2] = useState({
+  //   LeadStyle: { value: "combo" },
+  //   BoardSize: { value: "6x5" }
+  // } as VarType2);
 
   const formulaDisplay = `"Damage" = ${vars["Atk"].value} xx ${vars["LSAtk"].value} xx (1 + 0.25(7 + ${
     vars["LS+c"].value - 1
