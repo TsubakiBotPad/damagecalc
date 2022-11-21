@@ -1,6 +1,8 @@
+import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import { MathJax } from "better-react-mathjax";
 import { useState } from "react";
+import { breakpoint } from "../breakpoints";
 import { InputTable, VarType } from "../components/inputTable";
 import { TitleBar } from "../components/titleBar";
 import { FlexCol, FlexColC, H2, H3, HR2, Page } from "../stylePrimitives";
@@ -44,7 +46,7 @@ const CapDisplay = ({ components, cap }: { components: DamageComponents; cap: nu
   );
 };
 
-export const PADDamagePage = () => {
+export const DamageEstimatorPage = () => {
   const [vars, setVars] = useState({
     Atk: { value: 4000 },
     LSAtk: { value: 676 },
@@ -59,9 +61,8 @@ export const PADDamagePage = () => {
   //   BoardSize: { value: "6x5" }
   // } as VarType2);
 
-  const formulaDisplay = `"Damage" = ${vars["Atk"].value} xx ${vars["LSAtk"].value} xx (1 + 0.25(7 + ${
-    vars["LS+c"].value - 1
-  })) xx "Awakenings" xx "TeamEffects"`;
+  const formulaDisplay = `"Damage" = "ATK" xx "LSAtk" xx "BoardMatches" \
+  xx "Awakenings" xx "TeamEffects"`;
 
   const components: DamageComponents = {
     Atk: vars["Atk"].value,
@@ -72,44 +73,77 @@ export const PADDamagePage = () => {
     SuperGravity: vars["SuperGravity"].value
   };
 
+  const EquationDisplay = styled.div`
+    @media ${breakpoint.xs} {
+      display: none;
+    }
+  `;
+
+  const boardAssumptions = "Assumptions: Matched 7c, 1c on-color";
   return (
     <Page maxWidth={maxPageWidth}>
       <Frame>
         <TitleBar title="PAD Damage Estimator" />
-        <MathJax
-          renderMode={"pre"}
-          typesettingOptions={{ fn: "asciimath2chtml" }}
-          text={formulaDisplay}
-          inline
-          dynamic
-        />
+        <H2>{boardAssumptions}</H2>
+        <EquationDisplay>
+          <MathJax
+            renderMode={"pre"}
+            typesettingOptions={{ fn: "asciimath2chtml" }}
+            text={formulaDisplay}
+            inline
+            dynamic
+          />
+        </EquationDisplay>
         <InputTable inputs={vars} setInputs={setVars} />
-        {/*
-             ATK * (7c + lscomboAdd) (2.5x) * awakenings * team effects = damage Cap
-            */}
+        <span
+          className={css`
+            font-size: 14px;
+          `}
+        >
+          <span
+            className={css`
+              font-weight: 500;
+            `}
+          >
+            Instructions:
+          </span>
+          <br />0 = solve for this value
+          <br />1 = no contribution from this value
+        </span>
         <HR2 />
-        <H2>Average Board 7c, 1color:</H2>
-        <H3>Single Cap</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 31)} />
+        <FlexColC gap="0.5rem">
+          <H3>Single Cap</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 31)} />
+        </FlexColC>
 
-        <H3>Single Cap 1/3 Subattr</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
+        <FlexColC gap="0.5rem">
+          <H3>Single Cap 1/3 Subattr</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
+        </FlexColC>
 
-        <H3>Single Cap 1/10 Subattr</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
+        <FlexColC gap="0.5rem">
+          <H3>Single Cap 1/10 Subattr</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
+        </FlexColC>
 
-        <H3>Double Cap</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 32)} />
+        <FlexColC gap="0.5rem">
+          <H3>Double Cap</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 32)} />
+        </FlexColC>
 
-        <H3>Double Cap 1/3 Subattr</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
+        <FlexColC gap="0.5rem">
+          <H3>Double Cap 1/3 Subattr</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
+        </FlexColC>
 
-        <H3>Double Cap 1/10 Subattr</H3>
-        <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
+        <FlexColC gap="0.5rem">
+          <H3>Double Cap 1/10 Subattr</H3>
+          <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
+        </FlexColC>
 
         <HR2 />
 
-        <H3>More Info | Links</H3>
+        <H2>More Info | Links</H2>
         <FlexColC>
           <a href="https://discord.gg/pad">PAD Discord</a>
           <a href="https://i.imgur.com/ucgaB1g.png">Damage Math Infographic</a>

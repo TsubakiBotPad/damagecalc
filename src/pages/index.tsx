@@ -26,7 +26,7 @@ export const Index = () => {
           </FlexRow>
         </H1>
         <FlexCol>
-          <Link to="/pad-damage">PAD Damage</Link>
+          <Link to="/damage-estimator">PAD Damage</Link>
         </FlexCol>
       </Frame>
     </Page>
