@@ -5,7 +5,17 @@ import { useState } from "react";
 import { breakpoint } from "../breakpoints";
 import { InputTable, VarType } from "../components/inputTable";
 import { TitleBar } from "../components/titleBar";
-import { FlexCol, FlexColC, H2, H3, HR2, Page } from "../stylePrimitives";
+import {
+  FlexCol,
+  ResultsTableRow,
+  H2,
+  HR2,
+  Page,
+  ResultsTable,
+  ResultsTableHeader,
+  ResultsTableCell,
+  FlexColC
+} from "../stylePrimitives";
 
 const maxPageWidth = "1440px";
 
@@ -108,47 +118,63 @@ export const DamageEstimatorPage = () => {
           >
             Instructions:
           </span>
-          <br />0 = solve for this value
+          <br />
+          0/Unknown = solve for this value
           <br />1 = no contribution from this value
         </span>
         <HR2 />
-        <FlexColC>
-          <H3>Single Cap: Main Attr</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 31)} />
-        </FlexColC>
+        <ResultsTable>
+          <ResultsTableRow>
+            <ResultsTableHeader>Target damage</ResultsTableHeader>
+            <ResultsTableHeader>Remaining multiplier you need</ResultsTableHeader>
+          </ResultsTableRow>
+          <ResultsTableRow>
+            <ResultsTableCell>Single Cap: Main Attr</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 31)} />
+            </ResultsTableCell>
+          </ResultsTableRow>
 
-        <FlexColC>
-          <H3>Single Cap: Subattr (1/3)</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
-        </FlexColC>
+          <ResultsTableRow>
+            <ResultsTableCell>Single Cap: Subattr (1/3)</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
+            </ResultsTableCell>
+          </ResultsTableRow>
 
-        <FlexColC>
-          <H3>Single Cap: Subattr (1/10)</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
-        </FlexColC>
+          <ResultsTableRow>
+            <ResultsTableCell>Single Cap: Subattr (1/10)</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
+            </ResultsTableCell>
+          </ResultsTableRow>
 
-        <FlexColC>
-          <H3>Double Cap: Main Attr</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 32)} />
-        </FlexColC>
+          <ResultsTableRow>
+            <ResultsTableCell>Double Cap: Main Attr</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 32)} />
+            </ResultsTableCell>
+          </ResultsTableRow>
 
-        <FlexColC>
-          <H3>Double Cap: Subattr (1/3)</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
-        </FlexColC>
+          <ResultsTableRow>
+            <ResultsTableCell>Double Cap: Subattr (1/3)</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
+            </ResultsTableCell>
+          </ResultsTableRow>
 
-        <FlexColC>
-          <H3>Double Cap: Subattr (1/10)</H3>
-          <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
-        </FlexColC>
-
+          <ResultsTableRow>
+            <ResultsTableCell>Double Cap: Subattr (1/10)</ResultsTableCell>
+            <ResultsTableCell>
+              <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
+            </ResultsTableCell>
+          </ResultsTableRow>
+        </ResultsTable>
         <HR2 />
 
         <H2>More Info | Links</H2>
-        <FlexColC>
-          <a href="https://discord.gg/pad">PAD Discord</a>
-          <a href="https://i.imgur.com/ucgaB1g.png">Damage Math Infographic</a>
-        </FlexColC>
+        <a href="https://discord.gg/pad">PAD Discord</a>
+        <a href="https://i.imgur.com/ucgaB1g.png">Damage Math Infographic</a>
       </Frame>
     </Page>
   );
