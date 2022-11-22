@@ -113,3 +113,33 @@ export const BoundingBox = styled.div<BoundingBoxProps>`
     max-width: ${(props) => props.maxWidthM ?? "100%"};
   }
 `;
+
+type TableProps = {};
+
+type TableRowProps = {};
+
+type TableCellProps = {
+  border?: string;
+  padding?: string;
+};
+
+type TableHeaderProps = {
+  border?: string;
+  padding?: string;
+  fontWeight?: string;
+};
+
+export const ResultsTable = styled.table<TableProps>``;
+
+export const ResultsTableRow = styled.tr<TableRowProps>``;
+
+export const ResultsTableCell = styled.td<TableCellProps>`
+  border: 1px solid black;
+  padding: 0.5rem;
+`;
+
+export const ResultsTableHeader = styled.th<TableHeaderProps>`
+  padding: 0.5rem;
+  border: 1px solid black;
+  font-weight: bold;
+`;
