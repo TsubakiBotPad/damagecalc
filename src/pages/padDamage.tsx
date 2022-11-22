@@ -13,8 +13,7 @@ import {
   Page,
   ResultsTable,
   ResultsTableHeader,
-  ResultsTableCell,
-  FlexColC
+  ResultsTableCell
 } from "../stylePrimitives";
 
 const maxPageWidth = "1440px";

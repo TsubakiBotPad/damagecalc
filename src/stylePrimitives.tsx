@@ -52,10 +52,10 @@ export const FlexCol = styled.div<FlexProps>`
   gap: ${(props) => (props.gap ? props.gap : "0")};
 `;
 
-export const FlexColC = styled(FlexCol)`
-  align-items: center;
-  gap: 0.5rem;
-`;
+// export const FlexColC = styled(FlexCol)`
+//   align-items: center;
+//   gap: 0.5rem;
+// `;
 
 type ColorProps = {
   color: string;
