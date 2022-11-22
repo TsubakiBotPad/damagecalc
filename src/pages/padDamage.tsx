@@ -112,32 +112,32 @@ export const DamageEstimatorPage = () => {
           <br />1 = no contribution from this value
         </span>
         <HR2 />
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Single Cap: Main Attr</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31)} />
         </FlexColC>
 
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Single Cap: Subattr (1/3)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31) * 3} />
         </FlexColC>
 
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Single Cap: Subattr (1/10)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 31) * 10} />
         </FlexColC>
 
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Double Cap: Main Attr</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32)} />
         </FlexColC>
 
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Double Cap: Subattr (1/3)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32) * 3} />
         </FlexColC>
 
-        <FlexColC gap="0.5rem">
+        <FlexColC>
           <H3>Double Cap: Subattr (1/10)</H3>
           <CapDisplay components={components} cap={Math.pow(2, 32) * 10} />
         </FlexColC>
