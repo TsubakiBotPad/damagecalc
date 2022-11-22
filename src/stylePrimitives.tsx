@@ -126,6 +126,7 @@ type TableCellProps = {
 type TableHeaderProps = {
   border?: string;
   padding?: string;
+  fontWeight?: string;
 };
 
 export const ResultsTable = styled.table<TableProps>``;
@@ -140,4 +141,5 @@ export const ResultsTableCell = styled.td<TableCellProps>`
 export const ResultsTableHeader = styled.th<TableHeaderProps>`
   padding: 0.5rem;
   border: 1px solid black;
+  font-weight: bold;
 `;
